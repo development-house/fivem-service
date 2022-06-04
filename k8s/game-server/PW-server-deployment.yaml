@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: server-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: server
+  template:
+    metadata:
+      labels:
+        component: server
+    spec:
+      containers:
+        - name: server
+          image: cscawley/fivem
+          ports:
+            - containerPort: 30120
+          volumes:
+            - name: asset-storage
+              persistentVolumeClaim:
+                claimName: pw-asset-persistent-volume-claim
+          volumeMounts:
+            - name: asset-storage
+              mountPath: /server-data/resources
+              subPath: assets
+          env:
+            - name: MYSQLUSER
+              value: mysql
+            - name: MYSQLHOST
+              value: mysql-cluster-ip-service
+            - name: SQLPORT
+              value: '3306'
+            - name: MYSQLDATABASE
+              value: MYSQL
+            - name: SQLPASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: sqlpassword
+                  key: SQLPASSWORD

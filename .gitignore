@@ -1,0 +1,8 @@
+# 
+*-kubeconfig.yaml
+kubeconfig.yaml
+#
+server.cfg
+/cache/
+/resources/\[local\]/
+/db/
