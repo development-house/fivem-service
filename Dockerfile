@@ -10,20 +10,17 @@ RUN wget -O- https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/
     | tar xJ --strip-components=1 \
     --exclude alpine/dev --exclude alpine/proc \
     --exclude alpine/run --exclude alpine/sys \
-    && mkdir -p /output/opt/cfx-server-data/resources /output/usr/local/share \
+    && mkdir -p /output/opt/cfx-server-data/resources /output/usr/local/share /txData \
     && apk -p $PWD add tini
-COPY ./server.cfg opt/cfx-server-data
-COPY ./logo.png opt/cfx-server-data
-COPY entrypoint usr/bin/entrypoint
-RUN chmod +x /output/usr/bin/entrypoint
-
 
 FROM scratch
-
+ENV TINI_VERSION v0.19.0
 COPY --from=build /output/ /
-WORKDIR /config
+COPY server.cfg /opt/cfx-server-data/server.cfg
+COPY logo.png /opt/cfx-server-data/logo.png
 EXPOSE 30120
-# Default to an empty CMD, so we can use it to add seperate args to the binary
-CMD [""]
-ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/entrypoint"]
+EXPOSE 40120
 VOLUME /opt/cfx-server-data/resources
+VOLUME /txData
+ENTRYPOINT ["tini", "--"]
+CMD ["opt/cfx-server/FXServer"]

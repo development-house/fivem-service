@@ -1,7 +1,6 @@
-# 
 *-kubeconfig.yaml
 kubeconfig.yaml
-#
+txData
 server.cfg
 /cache/
 /resources/\[local\]/
