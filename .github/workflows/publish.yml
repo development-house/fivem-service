@@ -61,8 +61,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-      - uses: actions/checkout@v1
-      - uses: actions-hub/kubectl@master
+        uses: actions/checkout@v1
+      - name: Connect to k8s
+        uses: actions-hub/kubectl@master
         env:
           KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
         with:
