@@ -11,6 +11,7 @@ env:
 
 jobs:
   build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -41,6 +42,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
   scan:
+    name: Scan Container
     runs-on: ubuntu-latest
     steps:
       - name: Run Trivy vulnerability scanner
@@ -55,11 +57,13 @@ jobs:
         with:
           sarif_file: 'trivy-results.sarif'
   deploy:
+    name: Deploy
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy
-        - uses: actions-hub/kubectl@master
-          env:
-            KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
-          with:
-            args: get pods
+      - name: Checkout code
+      - uses: actions/checkout@v1
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_CONFIG: ${{ secrets.KUBE_CONFIG }}
+        with:
+          args: get pods
