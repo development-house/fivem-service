@@ -1,0 +1,48 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fivem-service-deployment
+spec:
+  selector:
+    matchLabels:
+      app: fivem-service
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        app: fivem-service
+    spec:
+      containers:
+        - name: server
+          image: ghcr.io/purple-world/fivem-service:main
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "250m"
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 30120
+          volumes:
+            - name: asset-storage
+              persistentVolumeClaim:
+              claimName: pw-asset-persistent-volume-claim
+          volumeMounts:
+            - name: asset-storage
+              mountPath: /server-data/resources
+              subPath: assets
+      env:
+        - name: MYSQLUSER
+          value: mysql
+        - name: MYSQLHOST
+          value: database-cluster-ip-service
+        - name: SQLPORT
+          value: '3306'
+        - name: MYSQLDATABASE
+          value: MYSQL
+        - name: SQLPASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: sqlpassword
+              key: SQLPASSWORD

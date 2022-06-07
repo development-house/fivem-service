@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: pw-asset-persistent-volume-claim
+  name: asset-persistent-volume-claim
 spec:
   accessModes:
     - ReadWriteOnce
