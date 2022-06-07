@@ -27,22 +27,22 @@ spec:
           volumes:
             - name: asset-storage
               persistentVolumeClaim:
-              claimName: pw-asset-persistent-volume-claim
+              claimName: asset-persistent-volume-claim
           volumeMounts:
             - name: asset-storage
               mountPath: /server-data/resources
               subPath: assets
-      env:
-        - name: MYSQLUSER
-          value: mysql
-        - name: MYSQLHOST
-          value: database-cluster-ip-service
-        - name: SQLPORT
-          value: '3306'
-        - name: MYSQLDATABASE
-          value: MYSQL
-        - name: SQLPASSWORD
-          valueFrom:
-            secretKeyRef:
-              name: sqlpassword
-              key: SQLPASSWORD
+    env:
+      - name: MYSQLUSER
+        value: mysql
+      - name: MYSQLHOST
+        value: database-cluster-ip-service
+      - name: SQLPORT
+        value: '3306'
+      - name: MYSQLDATABASE
+        value: MYSQL
+      - name: SQLPASSWORD
+        valueFrom:
+          secretKeyRef:
+            name: sqlpassword
+            key: SQLPASSWORD

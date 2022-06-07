@@ -7,5 +7,5 @@ spec:
   selector:
     component: server
   ports:
-  - port: 30120
-    targetPort: 30120
+    - port: 30120
+      targetPort: 30120
