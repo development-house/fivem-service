@@ -6,9 +6,15 @@ Example FiveM containerization service.
 
 Built for production with txAdmin dashboard configuration.
 
-**Run container locally with windows git-bash**
+**Run game and data service**
 
 ```bash
 docker build -t pw/fivem .
-docker run -it -p 40120:40120 -p 30120:30120 -p 30120:30120/udp -v /${PWD}/resources:/opt/cfx-server-data/resources -v /${PWD}/txData:/txData pw/fivem
+docker-compose up -d
+# Follow the output of the game service (FiveM console output)
+docker-compose logs -f game
 ```
+
+**Complete FXAdmin's initial startup via the dashboard**
+
+http://localhost:40120
