@@ -9,7 +9,7 @@ Built for production with txAdmin dashboard configuration.
 **Run game and data service**
 
 ```bash
-docker build -t pw/fivem .
+docker build -t purpleworld/game .
 docker-compose up -d
 # Follow the output of the game service (FiveM console output)
 docker-compose logs -f game
