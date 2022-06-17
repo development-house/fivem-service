@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  game:
+    image: purpleworld/game
+    container_name: game
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - "./resources:/opt/cfx-server-data/resources"
+      - "./txData:/txData"
+      - "./cache:/opt/cfx-server-data/cache"
+    ports:
+      # Admin dashboard
+      - "40120:40120"
+      # Game TCP/UDP ports
+      - "30120:30120"
+      - "30120:30120/udp"
+  data:
+    image: mariadb:latest
+    container_name: data
+    restart: always
+    volumes:
+      - ./Docker/mariadb:/var/lib/mysql
+    environment:
+      MARIADB_DATABASE: 'pw'
+      MARIADB_USER: 'user'
+      MARIADB_PASSWORD: 'password'
+      MARIADB_ROOT_PASSWORD: 'password'
+    ports:
+      - 3308:3306
