@@ -1,6 +1,6 @@
 # FiveM Service
 
-[![Publish to package](https://github.com/purple-world/fivem-service/actions/workflows/publish.yml/badge.svg)](https://github.com/purple-world/fivem-service/actions/workflows/publish.yml)
+[![Publish to package](https://github.com/purple-world/fivem-service/actions/workflows/publish.yml/badge.svg)](https://github.com/purple-world/fivem-service/actions/workflows/publish.yml) [![vulnerability scan](https://github.com/purple-world/fivem-service/actions/workflows/scan.yml/badge.svg)](https://github.com/purple-world/fivem-service/actions/workflows/scan.yml)
 
 Example FiveM containerization service.
 
