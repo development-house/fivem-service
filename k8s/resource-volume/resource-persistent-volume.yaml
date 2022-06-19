@@ -1,14 +1,15 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: asset-persistent-volume
+  name: resource-persistent-volume
+  namespace: fivem
   labels:
     type: local
 spec:
   storageClassName: do-block-storage
   capacity:
-    storage: 10Gi
+    storage: 2Gi
   accessModes:
     - ReadWriteOnce
   hostPath:
-    path: "/resources"
+    path: "/"

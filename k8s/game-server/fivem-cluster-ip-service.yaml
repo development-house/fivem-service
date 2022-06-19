@@ -2,6 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: fivem-cluster-ip-service
+  namespace: fivem
 spec:
   type: ClusterIP
   selector:

@@ -2,10 +2,11 @@ apiVersion: v1
 kind: Service
 metadata:
   name: database-cluster-ip-service
+  namespace: fivem
 spec:
   type: ClusterIP
   selector:
-    component: mysql
+    component: mariadb
   ports:
     - port: 3306
       targetPort: 3306

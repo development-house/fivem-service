@@ -2,19 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: database-service-deployment
+  namespace: fivem
 spec:
   replicas: 1
   selector:
     matchLabels:
-      component: mysql
+      component: mariadb
   template:
     metadata:
       labels:
-        component: mysql
+        component: mariadb
     spec:
       containers:
-        - name: mysql
-          image: mysql
+        - name: mariadb
+          image: mariadb
           resources:
             requests:
               memory: "64Mi"
@@ -25,7 +26,7 @@ spec:
           ports:
             - containerPort: 3306
           volumeMounts:
-            - name: mysql-storage
+            - name: mariadb-storage
               mountPath: /var/lib/mysql
               subPath: mysql
       env:
@@ -35,6 +36,6 @@ spec:
               name: sqlpassword
               key: SQLPASSWORD
       volumes:
-        - name: mysql-storage
+        - name: mariadb-storage
           persistentVolumeClaim:
             claimName: database-persistent-volume-claim
