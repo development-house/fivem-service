@@ -1,5 +1,5 @@
-*-kubeconfig.yaml
-kubeconfig.yaml
+*kubeconfig.*
+secret.yml
 txData
 /cache/
 /resources/\[local\]/

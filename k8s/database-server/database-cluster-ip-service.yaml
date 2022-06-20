@@ -4,9 +4,8 @@ metadata:
   name: database-cluster-ip-service
   namespace: fivem
 spec:
-  type: ClusterIP
   selector:
-    component: mariadb
+    app: mariadb
   ports:
     - port: 3306
       targetPort: 3306
