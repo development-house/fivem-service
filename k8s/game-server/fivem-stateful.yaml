@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: fivem-stateful
+  namespace: fivem
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fivem
+  serviceName: "fivem-server"
+  template:
+    metadata:
+      labels:
+        app: fivem
+    spec:
+      containers:
+      - name: fivem-server
+        image: purpleworld/game
+        resources:
+          limits:
+            cpu: "4000m"
+            memory: "4Gi"
+          requests:
+            cpu: "1000m"
+            memory: "1Gi"
+        ports:
+          - containerPort: 40120
+            protocol: TCP
+          - containerPort: 30120
+            protocol: TCP
+          - containerPort: 30120
+            protocol: UDP
+        volumeMounts:
+          - name: resource-storage
+            mountPath: /opt/cfx-server-data/resources
+  volumeClaimTemplates:
+  - metadata:
+      name: resource-storage
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: do-block-storage
