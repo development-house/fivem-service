@@ -33,7 +33,7 @@ spec:
             protocol: UDP
         volumeMounts:
           - name: resource-storage
-            mountPath: /opt/cfx-server-data/resources
+            mountPath: /opt/cfx-server-data
   volumeClaimTemplates:
   - metadata:
       name: resource-storage

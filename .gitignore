@@ -4,3 +4,4 @@ txData
 /cache/
 /resources/\[local\]/
 /db/
+/Docker/mariadb
