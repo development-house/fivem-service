@@ -20,7 +20,7 @@ COPY logo.png /opt/cfx-server-data/logo.png
 EXPOSE 30120
 EXPOSE 30120/udp
 EXPOSE 40120
-VOLUME /opt/cfx-server-data/resources
+VOLUME /opt/cfx-server-data
 VOLUME /txData
 ENTRYPOINT ["tini", "--"]
 CMD ["opt/cfx-server/FXServer"]
