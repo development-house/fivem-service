@@ -1,0 +1,24 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: txadmin-https
+  namespace: fivem
+  annotations:
+    service.beta.kubernetes.io/do-loadbalancer-protocol: "http"
+    service.beta.kubernetes.io/do-loadbalancer-algorithm: "round_robin"
+    service.beta.kubernetes.io/do-loadbalancer-tls-ports: "443"
+    service.beta.kubernetes.io/do-loadbalancer-certificate-id: "your-certificate-id"
+    service.beta.kubernetes.io/do-loadbalancer-hostname: "example.com"
+spec:
+  type: LoadBalancer
+  selector:
+    app: pw-fivem
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 40120
+    - name: https
+      protocol: TCP
+      port: 443
+      targetPort: 40120
