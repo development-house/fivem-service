@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  labels:
+    app: gogs-stateful
+  name: gogs-stateful
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gogs-stateful
+  serviceName: gogs-service
+  template:
+    metadata:
+      labels:
+        app: gogs-stateful
+    spec:
+      containers:
+      - image: gogs/gogs:latest
+        imagePullPolicy: IfNotPresent
+        name: gogs-app
+        resources: {}
+        ports:
+          - containerPort: 3000
+            name: web
+            protocol: TCP
+          - containerPort: 22
+            name: ssh
+            protocol: TCP
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      volumeMounts:
+        - name: gogs-storage
+          mountPath: /data gogs/gogs
+  volumeClaimTemplates:
+  - metadata:
+      name: gogs-storage
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 25Gi
+      storageClassName: do-block-storage
