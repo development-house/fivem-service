@@ -5,7 +5,7 @@ RUN apk add --no-cache tini
 RUN apk add --no-cache libgcc
 RUN apk add --no-cache libstdc++
 RUN apk add --no-cache libcurl
-# RUN apk add --no-cache libv8
+RUN apk add --no-cache git
 WORKDIR /output
 RUN wget -O- https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/${FIVEM_VER}/fx.tar.xz \
     | tar xJ --strip-components=1 \
@@ -17,10 +17,9 @@ RUN cp -R /output/usr/* /usr/
 RUN mkdir /txData
 COPY server.cfg /opt/cfx-server-data/server.cfg
 COPY logo.png /opt/cfx-server-data/logo.png
-EXPOSE 30120
-EXPOSE 30120/udp
+EXPOSE 30125
+EXPOSE 30125/udp
 EXPOSE 40120
-VOLUME /opt/cfx-server-data
 VOLUME /txData
 ENTRYPOINT ["tini", "--"]
 CMD ["opt/cfx-server/FXServer"]

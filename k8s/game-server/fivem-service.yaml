@@ -4,15 +4,17 @@ metadata:
   name: fivem-service
   namespace: fivem
 spec:
-  type: LoadBalancer
+  type: NodePort
   selector:
     app: pw-fivem
   ports:
     - name: fivem-tcp
-      port: 30120
-      targetPort: 30120
+      port: 30125
+      targetPort: 30125
       protocol: TCP
+      nodePort: 30125
     - name: fivem-udp
-      port: 30120
-      targetPort: 30120
+      port: 30125
+      targetPort: 30125
       protocol: UDP
+      nodePort: 30125

@@ -27,13 +27,13 @@ spec:
         ports:
           - containerPort: 40120
             protocol: TCP
-          - containerPort: 30120
+          - containerPort: 30125
             protocol: TCP
-          - containerPort: 30120
+          - containerPort: 30125
             protocol: UDP
         volumeMounts:
           - name: resource-storage
-            mountPath: /opt/cfx-server-data
+            mountPath: /txData
   volumeClaimTemplates:
   - metadata:
       name: resource-storage
