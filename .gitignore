@@ -5,3 +5,4 @@ txData
 /resources/\[local\]/
 /db/
 /Docker/mariadb
+/Docker/.ssh/id_*

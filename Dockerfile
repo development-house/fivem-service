@@ -6,6 +6,7 @@ RUN apk add --no-cache libgcc
 RUN apk add --no-cache libstdc++
 RUN apk add --no-cache libcurl
 RUN apk add --no-cache git
+RUN apk add --no-cache openssh
 WORKDIR /output
 RUN wget -O- https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/${FIVEM_VER}/fx.tar.xz \
     | tar xJ --strip-components=1 \

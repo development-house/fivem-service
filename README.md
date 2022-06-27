@@ -27,4 +27,28 @@ docker-compose logs -f game
 `http://localhost:40120`
 ## K8s
 
-Kubernetes manifests are available, but need refactoring. Tutorial coming soon.
+Kubernetes manifests are available. A proper tutorial needs revision.
+
+```bash
+ssh-keygen -t ed25519
+```
+
+When prompted to enter a filename, enter the following to stage the key for entry into your FiveM pod.
+
+**./Docker/.ssh/id_ed25519**
+
+```bash
+# kubectl cp Docker/.ssh fivem/fivem-stateful-0:home/
+
+# kubectl -n fivem exec -it fivem-stateful-0 -- chown -R root:root home/.ssh
+
+# kubectl --kubeconfig=scratch-01-kubeconfig.yml -n fivem exec -it fivem-stateful-0 -- chmod 700 home/.ssh
+
+# kubectl exec -it fivem-stateful-0 -- chmod 600 home/.ssh/id_ed25519
+
+# kubectl exec -it fivem-stateful-0 -- chmod 644 home/.ssh/id_ed25519.pub
+
+# kubectl exec -it fivem-stateful-0 -- chmod 600 home/.ssh/config
+
+kubectl exec -it fivem-stateful-0 -- git clone -b main https://domain.tld/FiveM/server-data.git txData/
+```

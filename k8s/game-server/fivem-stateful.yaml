@@ -17,6 +17,7 @@ spec:
       containers:
       - name: fivem-server
         image: purpleworld/game
+        imagePullPolicy: Always
         resources:
           limits:
             cpu: "4000m"
@@ -34,6 +35,25 @@ spec:
         volumeMounts:
           - name: resource-storage
             mountPath: /txData
+        env:
+          - name: DATABASE
+            valueFrom:
+              secretKeyRef:
+                name: mariadb
+                key: DATABASE
+                optional: false
+          - name: USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: mariadb
+                key: USER_NAME
+                optional: false
+          - name: PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mariadb
+                key: PASSWORD
+                optional: false
   volumeClaimTemplates:
   - metadata:
       name: resource-storage
@@ -42,5 +62,5 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 10Gi
+          storage: 20Gi
       storageClassName: do-block-storage
