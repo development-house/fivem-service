@@ -9,6 +9,7 @@ metadata:
     service.beta.kubernetes.io/do-loadbalancer-tls-ports: "443"
     service.beta.kubernetes.io/do-loadbalancer-certificate-id: "your-certificate-id"
     service.beta.kubernetes.io/do-loadbalancer-hostname: "example.com"
+    service.beta.kubernetes.io/do-loadbalancer-redirect-http-to-https: "true"
 spec:
   type: LoadBalancer
   selector:
