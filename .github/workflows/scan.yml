@@ -1,7 +1,7 @@
 name: vulnerability scan
 on:
   schedule:
-    - cron: "* */3 * * *"
+    - cron: "0 */12 * * *"
 
 env:
   REGISTRY: ghcr.io
