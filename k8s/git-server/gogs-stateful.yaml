@@ -16,7 +16,6 @@ spec:
       labels:
         app: gogs-stateful
     spec:
-      dnsPolicy: ClusterFirst
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
       containers:

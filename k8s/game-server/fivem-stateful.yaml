@@ -28,9 +28,9 @@ spec:
         ports:
           - containerPort: 40120
             protocol: TCP
-          - containerPort: 30125
+          - containerPort: 30120
             protocol: TCP
-          - containerPort: 30125
+          - containerPort: 30120
             protocol: UDP
         volumeMounts:
           - name: resource-storage

@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-fivem
+spec:
+  rules:
+  - host: play.purpleworld.gg
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: fivem-service
+            ports: 
+              - name: fivem-tcp
+                port: 30120
+                targetPort: 30120
+                protocol: TCP
+                nodePort: 30120
+              - name: fivem-udp
+                port: 30120
+                targetPort: 30120
+                protocol: UDP
+                nodePort: 30120
+  ingressClassName: nginx

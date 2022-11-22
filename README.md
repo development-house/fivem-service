@@ -1,54 +1,28 @@
-# FiveM Game Microservice Architecture
-
-This is a FiveM game microservice architecture I'm working on. I made it open source to help others discover container deployment best practices as these pipelines are built.
+# FiveM k8s Game Server Architecture
 
 [![Publish to package](https://github.com/purple-world/fivem-service/actions/workflows/publish.yml/badge.svg)](https://github.com/purple-world/fivem-service/actions/workflows/publish.yml) [![vulnerability scan](https://github.com/purple-world/fivem-service/actions/workflows/scan.yml/badge.svg)](https://github.com/purple-world/fivem-service/actions/workflows/scan.yml)
 
-Built for production with txAdmin dashboard configuration.
-
-##### Features
-
-* Fixes security vulnerabilities in [linux](https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/) artifact.
-
-* Orchestration with database service.
-
-## Local
-
+Try it locally.
 ```bash
-git clone https://github.com/purple-world/fivem-service.git
-cd fivem-service
+## Build the game image
 docker build -t purpleworld/game .
+## Run the game and database service
 docker-compose up -d
-# Follow the output of the game service (FiveM console output)
+## Follow the instructions in the console output 
+## of the game service (FiveM console output)
 docker-compose logs -f game
 ```
-##### Complete txAdmin's initial startup via the dashboard
 
-`http://localhost:40120`
-## K8s
+Orchestrate the yaml k8s manifest files in a cluster with block storage capability.
 
-Kubernetes manifests are available. A proper tutorial needs revision.
+https://kubernetes.io/docs/reference/kubectl/cheatsheet/
 
-```bash
-ssh-keygen -t ed25519
-```
-
-When prompted to enter a filename, enter the following to stage the key for entry into your FiveM pod.
-
-**./Docker/.ssh/id_ed25519**
+Finish installing your FiveM server and restart by using your txAdmin web panel.
 
 ```bash
-# kubectl cp Docker/.ssh fivem/fivem-stateful-0:home/
-
-# kubectl -n fivem exec -it fivem-stateful-0 -- chown -R root:root home/.ssh
-
-# kubectl --kubeconfig=scratch-01-kubeconfig.yml -n fivem exec -it fivem-stateful-0 -- chmod 700 home/.ssh
-
-# kubectl exec -it fivem-stateful-0 -- chmod 600 home/.ssh/id_ed25519
-
-# kubectl exec -it fivem-stateful-0 -- chmod 644 home/.ssh/id_ed25519.pub
-
-# kubectl exec -it fivem-stateful-0 -- chmod 600 home/.ssh/config
-
-kubectl exec -it fivem-stateful-0 -- git clone -b main https://domain.tld/FiveM/server-data.git txData/
+## Enter a running shell in the FiveM StatefulSet
+kubectl -n fivem exec -it fivem-stateful-0 -- sh
+## Enter the txAdmin server-data directory. Remove the default
+## server and clone yours here. This directory 
+cd /txData/server-data
 ```
