@@ -1,28 +1,13 @@
-# FiveM k8s Game Server Architecture
+# FiveM Alpine Secure
+
+[Docker Hub](https://hub.docker.com/r/purpleworld/game)
 
 [![Publish to package](https://github.com/purple-world/fivem-service/actions/workflows/publish.yml/badge.svg)](https://github.com/purple-world/fivem-service/actions/workflows/publish.yml) [![vulnerability scan](https://github.com/purple-world/fivem-service/actions/workflows/scan.yml/badge.svg)](https://github.com/purple-world/fivem-service/actions/workflows/scan.yml)
 
-Try it locally.
-```bash
-## Build the game image
-docker build -t purpleworld/game .
-## Run the game and database service
-docker-compose up -d
-## Follow the instructions in the console output 
-## of the game service (FiveM console output)
-docker-compose logs -f game
-```
+# This project is deprecated, unsupported and not how we distribute our FiveM service anymore. #
 
-Orchestrate the yaml k8s manifest files in a cluster with block storage capability.
+This project started out as an experiment to see if we could build a custom operating system user space running FiveM's packaged linux server that met our standards of security. Those standards are simply maintain a passing security scan, which is more of a challenge than you might think.
 
-https://kubernetes.io/docs/reference/kubectl/cheatsheet/
+The main challenge in this is battling the chaotic nature of FiveM's "artifact" distribution, which is essentially a snapshot of an entire linux user space full of packages with known security vulnerabilities.
 
-Finish installing your FiveM server and restart by using your txAdmin web panel.
-
-```bash
-## Enter a running shell in the FiveM StatefulSet
-kubectl -n fivem exec -it fivem-stateful-0 -- sh
-## Enter the txAdmin server-data directory. Remove the default
-## server and clone yours here. This directory 
-cd /txData/server-data
-```
+We succeeded in building a testable alpine image that runs a stripped down FiveM distribution free from vulnerablities, which is still available on Dockerhub, but we can no longer maintain future FiveM updates due to the nature of how FiveM distributes their files.
