@@ -1,6 +1,6 @@
 FROM alpine:latest as build
-ENV FIVEM_NUM=5562
-ENV FIVEM_VER=5562-25984c7003de26d4a222e897a782bb1f22bebedd
+ENV FIVEM_NUM=5848
+ENV FIVEM_VER=5848-4f71128ee48b07026d6d7229a60ebc5f40f2b9db
 RUN apk add --no-cache tini
 RUN apk add --no-cache libgcc
 RUN apk add --no-cache libstdc++
