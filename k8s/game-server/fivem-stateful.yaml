@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: fivem-server
-        image: purpleworld/game
+        image: purpleworld/game:spirit
         imagePullPolicy: Always
         resources:
           limits:
@@ -36,6 +36,10 @@ spec:
           - name: resource-storage
             mountPath: /txData
         env:
+          - name: NO_LICENSE_KEY
+            value: "1"
+          - name: NO_DEFAULT_CONFIG
+            value: "1"
           - name: DATABASE
             valueFrom:
               secretKeyRef:
@@ -62,5 +66,5 @@ spec:
       - ReadWriteOnce
       resources:
         requests:
-          storage: 20Gi
+          storage: 25Gi
       storageClassName: do-block-storage

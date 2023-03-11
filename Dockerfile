@@ -19,7 +19,7 @@ RUN mkdir /txData
 COPY server.cfg /opt/cfx-server-data/server.cfg
 COPY logo.png /opt/cfx-server-data/logo.png
 EXPOSE 30125
-EXPOSE 30125/udp
+EXPOSE 30120/udp
 EXPOSE 40120
 VOLUME /txData
 ENTRYPOINT ["tini", "--"]

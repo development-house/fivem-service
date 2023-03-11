@@ -11,10 +11,10 @@ spec:
     - name: fivem-tcp
       port: 30120
       targetPort: 30120
-      protocol: TCP
       nodePort: 30120
+      protocol: TCP
     - name: fivem-udp
       port: 30120
       targetPort: 30120
-      protocol: UDP
       nodePort: 30120
+      protocol: UDP

@@ -1,0 +1,9 @@
+FROM spritsail/fivem as build
+ARG FIVEM_VER
+ARG FIVEM_NUM
+ARG DATA_VER
+RUN apk add --no-cache git
+WORKDIR /config
+EXPOSE 30120
+CMD [""]
+ENTRYPOINT ["/sbin/tini", "--", "/usr/bin/entrypoint"]
