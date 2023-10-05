@@ -1,4 +1,4 @@
-# FiveM Alpine Secure
+# FiveM Alpine Example (un-maintained)
 
 [Docker Hub](https://hub.docker.com/r/purpleworld/game)
 
